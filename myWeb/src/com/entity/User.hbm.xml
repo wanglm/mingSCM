@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.entity.User" table="test_user" catalog="tushu">
+		<id name="id" type="java.lang.Long">
+			<column name="id" length="13" />
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id" length="13">
+				<comment>用户ID</comment>
+			</column>
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="user_name" length="30">
+				<comment>用户名称</comment>
+			</column>
+		</property>
+		<property name="userPass" type="java.lang.String">
+			<column name="user_pass" length="30">
+				<comment>用户密码</comment>
+			</column>
+		</property>
+		<property name="userType" type="java.lang.String">
+			<column name="user_type" length="30">
+				<comment>用户类别</comment>
+			</column>
+		</property>
+		<property name="userOrg" type="java.lang.String">
+			<column name="user_org" length="30">
+				<comment>用户所属组织</comment>
+			</column>
+		</property>
+		<property name="createId" type="java.lang.Long">
+			<column name="create_id" length="13">
+				<comment>录入者ID</comment>
+			</column>
+		</property>
+		<property name="createTime" type="java.lang.Long">
+			<column name="create_time" length="100">
+				<comment>录入时间</comment>
+			</column>
+		</property>
+		<property name="updateId" type="java.lang.Long">
+			<column name="update_id" length="13">
+				<comment>更新者ID</comment>
+			</column>
+		</property>
+		<property name="updateTime" type="java.lang.Long">
+			<column name="update_time" length="100">
+				<comment>更新时间</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>
