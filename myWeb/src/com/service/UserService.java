@@ -4,12 +4,12 @@ import java.util.List;
 
 import net.sf.json.JSONObject;
 
-import com.dao.BaseDAO;
+import com.dao.UserDAO;
 
 public class UserService {
 
 	private JSONObject result;
-	private BaseDAO dao;
+	private UserDAO dao;
 
 	/**
 	 * 删改用户统一方法
@@ -18,7 +18,7 @@ public class UserService {
 	 * @return
 	 */
 	public JSONObject updateOrDeleteUser(String hql) {
-		result.put("success", dao.updateOrDeleteByHql(hql));
+		result.put("success", dao.upDateOrDeleteUser(hql));
 		return result;
 	}
 
@@ -29,12 +29,12 @@ public class UserService {
 	 * @return
 	 */
 	public JSONObject saveUser(String sql) {
-		result.put("success", dao.saveByHql(sql));
+		result.put("success", dao.saveUser(sql));
 		return result;
 	}
 
 	public List<?> selectUser(String hql) {
-		List<?> list = dao.select(hql);
+		List<?> list = dao.readUser(hql);
 		return list;
 	}
 
@@ -46,11 +46,11 @@ public class UserService {
 		this.result = result;
 	}
 
-	public BaseDAO getDao() {
+	public UserDAO getDao() {
 		return dao;
 	}
 
-	public void setDao(BaseDAO dao) {
+	public void setDao(UserDAO dao) {
 		this.dao = dao;
 	}
 

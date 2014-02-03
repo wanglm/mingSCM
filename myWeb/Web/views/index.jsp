@@ -11,7 +11,7 @@
 	rel="stylesheet">
 <link href="commons/style/bootstrap/carousel.css" rel="stylesheet">
 </head>
-<body>
+<body class="myBody">
 	<%@include file="../commons/jsp/Head.jsp"%>
 	<!-- Carousel-->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -56,13 +56,13 @@
 			class="glyphicon glyphicon-chevron-right"></span></a>
 	</div>
 	<!-- /.carousel -->
-	<div class="container marketing">
+	<div class="container">
 
 		<!-- Three columns of text below the carousel -->
 		<div class="row">
 			<div class="col-lg-4">
-				<img class="img-circle" src="commons/img/champions2008.jpg"
-					alt="" height="300px" width="350px">
+				<img class="img-circle" src="commons/img/champions2008.jpg" alt=""
+					height="300px" width="350px">
 				<h2>欧冠之路</h2>
 				<p>欧冠十六强抽签结束，曼联的对手奥林匹亚斯堪称十六强对手里面最弱，曼联能否顺利拿下比赛，还需要全体人员的努力。。。</p>
 				<p>
@@ -134,7 +134,9 @@
 	vHref.click(function() {
 		$('.modal').modal('show');
 	});
-	$('.btn-primary').bind('click',
+	$('.btn-primary')
+			.bind(
+					'click',
 					function() {
 						$.ajax({
 									type : 'POST',
@@ -145,7 +147,7 @@
 											var vLi = "<li class='dropdown'><a class='dropdown-toggle'"
 													+ "data-toggle='dropdown' href='javascript:void(0)'>个人管理</a>"
 													+ "<ul class='dropdown-menu'>"
-													+ "<li><a href='javascript:void(0)'>密码修改</a></li>"
+													+ "<li><a href='javascript:void(0)' onclick='fExcel()'>excel导入</a></li>"
 													+ "<li><a href='javascript:void(0)' onclick='fUpdateUser("
 													+ json.id
 													+ ")'>用户信息修改</a></li>"
@@ -170,5 +172,18 @@
 	function fSelect() {
 		location.href = "UserAction?actionType=select";
 	}
+
+	function fExcel() {
+		$.post("ExcelAction", {
+			excelName : "TGSOCWEB_SSH_工作日报_王禄铭_20140103(W1).xls"
+		}, function(json) {
+			if (json.success) {
+				alert("导入成功!");
+			}
+
+		});
+	}
+
+$('.myBody').css('min-height',0);
 </script>
 </html>

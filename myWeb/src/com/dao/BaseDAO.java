@@ -7,19 +7,20 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 public class BaseDAO {
-	private SessionFactory sessionFactory;
-	private boolean isSuccess = false;
 
-	public boolean updateOrDeleteByHql(String hql) {
-		Query query = getQuery(hql);
+	public static boolean updateOrDeleteByHql(String hql,
+			SessionFactory sessionFactory) {
+		Query query = getQuery(hql, sessionFactory);
 		int n = query.executeUpdate();
+		boolean isSuccess = false;
 		if (n > 0) {
 			isSuccess = true;
 		}
 		return isSuccess;
 	}
 
-	public boolean saveByHql(String sql) {
+	public static boolean saveBySql(String sql, SessionFactory sessionFactory) {
+		boolean isSuccess = false;
 		Session session = sessionFactory.openSession();
 		Query query = session.createSQLQuery(sql);
 		int n = query.executeUpdate();
@@ -29,23 +30,15 @@ public class BaseDAO {
 		return isSuccess;
 	}
 
-	public List<?> select(String hql) {
-		Query query = getQuery(hql);
+	public static List<?> select(String hql, SessionFactory sessionFactory) {
+		Query query = getQuery(hql, sessionFactory);
 		List<?> list = query.list();
 		return list;
 	}
 
-	public Query getQuery(String hql) {
+	public static Query getQuery(String hql, SessionFactory sessionFactory) {
 		Session session = sessionFactory.openSession();
 		return session.createQuery(hql);
-	}
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
 	}
 
 }

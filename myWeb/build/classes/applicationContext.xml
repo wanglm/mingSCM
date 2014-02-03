@@ -89,7 +89,7 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-			  <value>com/entity/User.hbm.xml</value>
+				<value>com/entity/User.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -103,7 +103,7 @@
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
 			<tx:method name="find*" propagation="REQUIRED"></tx:method>
-			<tx:method name="attachDirty*" propagation="REQUIRED"></tx:method>
+			<tx:method name="update*" propagation="REQUIRED"></tx:method>
 			<tx:method name="delete*" propagation="REQUIRED"></tx:method>
 			<tx:method name="save*" propagation="REQUIRED"></tx:method>
 			<tx:method name="add*" propagation="REQUIRED"></tx:method>
@@ -116,22 +116,37 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceServiceMethods" />
 	</aop:config>
 
-	<bean id="baseDao" class="com.dao.BaseDAO">
-		<property name="sessionFactory">
+	<bean id="UserDAO" class="com.dao.UserDAO">
+		<property name="sf">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	<bean id="userService" class="com.service.UserService">
 		<property name="dao">
-			<ref bean="baseDao" />
+			<ref bean="UserDAO" />
 		</property>
 	</bean>
+	<!-- <bean id="excelService" class="com.service.ExcelService">
+		<property name="dao">
+			<ref bean="baseDao" />
+		</property>
+	</bean> -->
 	<bean id="userAction" class="com.action.UserAction" scope="prototype">
 		<property name="us">
 			<ref bean="userService" />
 		</property>
 	</bean>
 	<bean id="login" class="com.action.LoginAction" scope="prototype">
+		<property name="us">
+			<ref bean="userService" />
+		</property>
+	</bean>
+<!-- 	<bean id="excel" class="com.action.ExcelAction" scope="prototype">
+		<property name="es">
+			<ref bean="excelService" />
+		</property>
+	</bean> -->
+	<bean id="userMgAction" class="com.action.UserMgAction" scope="prototype">
 		<property name="us">
 			<ref bean="userService" />
 		</property>

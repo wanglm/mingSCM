@@ -6,23 +6,29 @@
 		<action name="">
 			<result>/views/index.jsp</result>
 		</action>
+		<action name="UserAction" class="userAction">
+			<result name="success">
+			/views/User.jsp
+			</result>
+			<result name="save">
+				/views/UserForm.jsp
+			</result>
+		</action>
 	</package>
 
 
 	<package name="ajax" extends="json-default">
-		<action name="UserAction" class="userAction">
+		<action name="LoginAction" class="login">
 			<result name="success" type="json">
 				<param name="root">result</param>
 			</result>
-			<result name="query">
-				/views/User.jsp
-			</result>
-			<result name="toUpdateOrSave">
-				/views/UserForm.jsp
-			</result>
 		</action>
-		
-		<action name="LoginAction" class="login">
+		<!-- <action name="ExcelAction" class="excel">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action> -->
+		<action name="UserMgAction" class="userMgAction">
 			<result name="success" type="json">
 				<param name="root">result</param>
 			</result>

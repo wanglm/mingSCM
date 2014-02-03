@@ -14,26 +14,59 @@
 <body>
 	<%@include file="../commons/jsp/Head.jsp"%>
 	<div class="container">
-		<form class="form-horizontal" role="form">
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-				<div class="col-xs-4">
-				<input
-					type="email" class="form-control " id="exampleInputEmail1"
-					placeholder="Enter email">
-				</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">编辑用户信息</div>
+			<div class="panel-body">
+				<form class="form-horizontal" role="form">
+					<input type="hidden" name="user.id">
+					<div class="form-group">
+						<label for="userName" class="col-sm-2 control-label">用户名称</label>
+						<div class="col-xs-4">
+							<input type="email" class="form-control " id="userName" name="user.userName"
+								placeholder="User name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="userPass" class="col-sm-2 control-label">用户密码</label>
+						<div class="col-xs-4">
+							<input type="password" class="form-control" name="user.userPass"
+								id="userPass" placeholder="Pass word">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="userType" class="col-sm-2 control-label">用户类型</label>
+						<div class="col-xs-4">
+							<input type="text" class="form-control" name="user.userType"
+								id="userType" placeholder="User type">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="userOrg" class="col-sm-2 control-label">用户所属组织</label>
+						<div class="col-xs-4">
+							<input type="text" class="form-control" name="user.userOrg"
+								id="userOrg" placeholder="User org">
+						</div>
+					</div>
+					<div class="btn-group">
+					    <button type="button" class="btn btn-success">确定</button>
+					    <button type="button" class="btn btn-default">取消</button>
+				    </div>
+				</form>
 			</div>
-			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-				<div class="col-xs-4"><input
-					type="password" class="form-control" id="exampleInputPassword1"
-					placeholder="Password">
-				</div>
-			</div>
-			<button type="submit" class="btn btn-default pull-right">Submit</button>
-		</form>
+		</div>
 	</div>
 
 </body>
 <%@include file="../commons/jsp/JavaScript.jsp"%>
+<script>
+$('.btn-success').on('click',function(){
+	$.post('UserMgAction',$('.form-horizontal').serialize(),function(json){
+        if(json.success){
+        	location.href="UserAction?actionType=select";
+        }else{
+        	alert('保存失败！');
+        }
+	});
+});
+</script>
 </html>
